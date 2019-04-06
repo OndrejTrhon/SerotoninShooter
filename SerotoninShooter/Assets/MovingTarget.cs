@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class MovingTarget : MonoBehaviour {
 
+	public GameObject ObjectToSwitch;
 	// Use this for initialization
 	void Start () {
 		GetComponent<Rigidbody2D>().velocity = Vector2.down * 2;
@@ -15,15 +16,10 @@ public class MovingTarget : MonoBehaviour {
 		
 	}
 
-	void OnCollisionEnter(Collision c)
- {
-     
- 
-     // If the object we hit is the enemy
-     if (c.gameObject.tag == "Player")
-     {
-        
-		GetComponent<Rigidbody2D>().gravityScale = -1;   
-     }
- }
+	void OnCollisionEnter2D(Collision2D coll) {
+	if (coll.gameObject.tag == "Player") {
+			GetComponent<Rigidbody2D>().velocity *= -1;
+	}
+}
+
 }
