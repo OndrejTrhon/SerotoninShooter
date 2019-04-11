@@ -6,6 +6,7 @@ using UnityEngine;
 public class MovingTarget : MonoBehaviour {
 
 	public GameObject ObjectToSwitch;
+	bool MovingState = false;
 	// Use this for initialization
 	void Start () {
 		GetComponent<Rigidbody2D>().velocity = Vector2.down * 2;
@@ -17,8 +18,9 @@ public class MovingTarget : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
-	if (coll.gameObject.tag == "Player") {
+	if (MovingState == false && coll.gameObject.tag == "Player") {
 			GetComponent<Rigidbody2D>().velocity *= -1;
+			MovingState = true;
 	}
 }
 
