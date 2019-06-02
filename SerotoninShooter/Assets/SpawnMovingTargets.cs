@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpawnMovingTargets : MonoBehaviour {
 	float timer = 0;
+	public float TimeThreshold;
     public GameObject newObject;
 	// Use this for initialization
 	void Start () {
@@ -15,7 +16,7 @@ public class SpawnMovingTargets : MonoBehaviour {
 		timer += Time.deltaTime;
   	  float range = Random.Range (-2, 2);
    	 Vector3 newPosition = new Vector3 (GameObject.Find("targetSource").transform.position.x + range, transform.position.y, 0);
-    	if (timer >= 1)
+    	if (timer >= TimeThreshold)
     {
          GameObject t = (GameObject)(Instantiate (newObject, newPosition, Quaternion.identity));
          timer = 0;

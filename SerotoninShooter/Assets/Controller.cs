@@ -12,6 +12,8 @@ public class Controller : MonoBehaviour
 
     public Text LevelText;
     public Text TimeText;
+
+    public SpawnMovingTargets Spawner;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,9 +26,13 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        UpdateDifficulty();
+
      if (Input.GetKeyDown(KeyCode.E)) {
               Level = Level + 3;
               LevelText.text = "Level: " + Level.ToString ();
+
 
      }
           
@@ -59,9 +65,6 @@ public class Controller : MonoBehaviour
     }
 
     //UpdateDifficulty according to the level
-    void UpdateDifficulty() {
-        Debug.Log("UpdateDifficulty"); 
-    }
 
     void TakeMedication() {
         Level = Level + 3;
@@ -77,5 +80,32 @@ public class Controller : MonoBehaviour
     void SetState() {
         Debug.Log("State"); 
 
+    }
+
+    void UpdateDifficulty() {
+        if (Level == 10) {
+            Spawner.TimeThreshold = 1f;
+        } else if (Level == 9) {
+            Spawner.TimeThreshold = 0.9f;
+        } else if (Level == 9) {
+            Spawner.TimeThreshold = 0.9f;
+        } else if (Level == 8) {
+            Spawner.TimeThreshold = 0.8f;
+        } else if (Level == 7) {
+            Spawner.TimeThreshold = 0.7f;
+        } else if (Level == 6) {
+            Spawner.TimeThreshold = 0.6f;
+        } else if (Level == 5) {
+            Spawner.TimeThreshold = 0.5f;
+        } else if (Level == 4) {
+            Spawner.TimeThreshold = 0.4f;
+        } else if (Level == 3) {
+            Spawner.TimeThreshold = 0.3f;
+        } else if (Level == 2) {
+            Spawner.TimeThreshold = 0.2f;
+        } else if (Level == 1) {
+            Spawner.TimeThreshold = 0.1f;
+        }
+        
     }
 }
