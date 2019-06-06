@@ -30,9 +30,7 @@ public class Controller : MonoBehaviour
         UpdateDifficulty();
 
      if (Input.GetKeyDown(KeyCode.E)) {
-              Level = Level + 3;
-              LevelText.text = "Level: " + Level.ToString ();
-
+              TakeMedication();
 
      }
           
@@ -67,20 +65,38 @@ public class Controller : MonoBehaviour
     //UpdateDifficulty according to the level
 
     void TakeMedication() {
-        Level = Level + 3;
-        LevelText.text = "Level: " + Level.ToString ();
         CheckTime();
     }
 
     void CheckTime() {
+         
+        if (Time == 11 || Time == 12 || Time = 13) {
+            Level = 10
+        } else if (Time > 0 && Time < 4) {
+        } else if (Time > 3 && Time < 8) {
+        } else if (Time > 7 && Time < 11) {
+            
+        } else if (Time > 13 && Time < 18) {
+            
+        } else if (Time > 17 && Time < 21) {
+            
+        } else if (Time > 20 && Time < 25) {
+            
+        }
+            
+
 
         SetState();
+
+        
+
     }
 
     void SetState() {
         Debug.Log("State"); 
 
     }
+
 
     void UpdateDifficulty() {
         if (Level == 10) {
