@@ -6,9 +6,14 @@ using UnityEngine.UI;
 public class Controller : MonoBehaviour
 
 {
-    public int TickTime;
     private int Level;
+    //StartingLevel, for dev purposes only
+ 
     private int Time;
+    //Time, starting time, for dev purposes only
+
+    private int GameState;
+    //1 = normal , 2 = too soon, 3 = way too soon, 4 = too early, 5 = way too early
 
     public Text LevelText;
     public Text TimeText;
@@ -17,26 +22,24 @@ public class Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Level = 10;
+        Level = 12;
         Time = 0;
-        InvokeRepeating("Ticker", 1.0f, TickTime);
+        GameState = 1;
+        InvokeRepeating("Ticker", 1.0f, 1f);
         InvokeRepeating("Clock", 1.0f, 1f);
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        UpdateDifficulty();
-
+        //This is where you take antidepressants, yay
      if (Input.GetKeyDown(KeyCode.E)) {
               TakeMedication();
-
      }
           
     }
 
-    //Main ticking function
+    //Clock only controls time
 
     void Clock() {
         Debug.Log("Time"); 
@@ -49,10 +52,11 @@ public class Controller : MonoBehaviour
         TimeText.text = "Time: " + Time.ToString ();
     }
 
+    //Tick is the main fucntion which is updated every second, setting the difficulty of the game
     void Ticker()
     {
-              Debug.Log("Test"); 
-              LevelObserver();
+        UpdateDifficulty();
+        LevelObserver();
               Debug.Log(Level);
     }
 
@@ -70,8 +74,8 @@ public class Controller : MonoBehaviour
 
     void CheckTime() {
          
-        if (Time == 11 || Time == 12 || Time = 13) {
-            Level = 10
+        if ((Time == 11) || (Time == 12) || (Time == 13)) {
+            Level = 10;
         } else if (Time > 0 && Time < 4) {
         } else if (Time > 3 && Time < 8) {
         } else if (Time > 7 && Time < 11) {
@@ -99,29 +103,68 @@ public class Controller : MonoBehaviour
 
 
     void UpdateDifficulty() {
-        if (Level == 10) {
-            Spawner.TimeThreshold = 1f;
-        } else if (Level == 9) {
-            Spawner.TimeThreshold = 0.9f;
-        } else if (Level == 9) {
-            Spawner.TimeThreshold = 0.9f;
-        } else if (Level == 8) {
-            Spawner.TimeThreshold = 0.8f;
-        } else if (Level == 7) {
-            Spawner.TimeThreshold = 0.7f;
-        } else if (Level == 6) {
-            Spawner.TimeThreshold = 0.6f;
-        } else if (Level == 5) {
-            Spawner.TimeThreshold = 0.5f;
-        } else if (Level == 4) {
-            Spawner.TimeThreshold = 0.4f;
-        } else if (Level == 3) {
-            Spawner.TimeThreshold = 0.3f;
-        } else if (Level == 2) {
-            Spawner.TimeThreshold = 0.2f;
-        } else if (Level == 1) {
-            Spawner.TimeThreshold = 0.1f;
-        }
         
-    }
+        if (GameState == 1) {
+            if (Level == 24) {
+                Spawner.TimeThreshold = 2f;
+            } else if (Level == 23) {
+                Spawner.TimeThreshold = 1.9f;
+            } else if (Level == 22) {
+                Spawner.TimeThreshold = 1.8f;
+            } else if (Level == 21) {
+                Spawner.TimeThreshold = 1.7f;
+            } else if (Level == 20) {
+                Spawner.TimeThreshold = 1.6f;
+            } else if (Level == 19) {
+                Spawner.TimeThreshold = 1.5f;
+            } else if (Level == 18) {
+                Spawner.TimeThreshold = 1.4f;
+            } else if (Level == 17) {
+                Spawner.TimeThreshold = 1.3f;
+            } else if (Level == 16) {
+                Spawner.TimeThreshold = 1.2f;
+            } else if (Level == 15) {
+                Spawner.TimeThreshold = 1.1f;
+            } else if (Level == 14) {
+                Spawner.TimeThreshold = 1.0f;
+            } else if (Level == 13) {
+                Spawner.TimeThreshold = 0.9f;
+            } else if (Level == 12) {
+                Spawner.TimeThreshold = 0.85f;
+            } else if (Level == 11) {
+                Spawner.TimeThreshold = 0.8f;
+            } else if (Level == 10) {
+                Spawner.TimeThreshold = 0.75f;
+            } else if (Level == 9) {
+                Spawner.TimeThreshold = 0.7f;
+            } else if (Level == 8) {
+                Spawner.TimeThreshold = 0.65f;
+            } else if (Level == 7) {
+                Spawner.TimeThreshold = 0.6f;
+            } else if (Level == 6) {
+                Spawner.TimeThreshold = 0.5f;
+            } else if (Level == 5) {
+                Spawner.TimeThreshold = 0.4f;
+            } else if (Level == 4) {
+                Spawner.TimeThreshold = 0.3f;
+            } else if (Level == 3) {
+                Spawner.TimeThreshold = 0.2f;
+            } else if (Level == 2) {
+                Spawner.TimeThreshold = 0.15f;
+            } else if (Level == 1) {
+                Spawner.TimeThreshold = 0.1f;
+            } else if (Level == 0) {
+                Spawner.TimeThreshold = 0.1f;
+            }
+        } else if (GameState == 2) {
+
+        } else if (GameState == 3) {
+
+        } else if (GameState == 4) {
+
+        } else if (GameState == 5) {
+
+     }
+}
+
 }
