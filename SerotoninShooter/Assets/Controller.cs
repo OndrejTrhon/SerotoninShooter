@@ -13,10 +13,11 @@ public class Controller : MonoBehaviour
     //Time, starting time, for dev purposes only
 
     private int GameState;
-    //1 = normal , 2 = too soon, 3 = way too soon, 4 = too early, 5 = way too early
+    //1 = normal , 2 = soon, 3 = too soon, 4 = early, 5 = too early
 
     public Text LevelText;
     public Text TimeText;
+    public Text GameStateText;
 
     public SpawnMovingTargets Spawner;
     // Start is called before the first frame update
@@ -58,6 +59,7 @@ public class Controller : MonoBehaviour
         UpdateDifficulty();
         LevelObserver();
               Debug.Log(Level);
+              GameStateText.text = "GameState: " + GameState.ToString ();
     }
 
     //function taking care of checking the level of antidepressant
@@ -90,15 +92,30 @@ public class Controller : MonoBehaviour
             
 
 
-        SetState();
 
         
 
     }
 
-    void SetState() {
-        Debug.Log("State"); 
+    //SetState Functions, invoked by CheckTime() which alter gameplay according to when player took medication
+    void SetStateNormal() {
+        GameState = 1;
+    }
 
+    void SetStateSoon() {
+        GameState = 2;
+    }
+
+    void SetStateTooSoon() {
+        GameState = 3;
+    }
+
+    void SetStateEarly() {
+        GameState = 4;
+    }
+
+    void SetStateTooEarly() {
+        GameState = 5;
     }
 
 
@@ -157,13 +174,17 @@ public class Controller : MonoBehaviour
                 Spawner.TimeThreshold = 0.1f;
             }
         } else if (GameState == 2) {
-
+                Spawner.TimeThreshold = 0.8f; 
+                 Invoke("SetStateNormal",5);
         } else if (GameState == 3) {
-
+                Spawner.TimeThreshold = 0.5f;
+                Invoke("SetStateNormal",5);
         } else if (GameState == 4) {
-
+                Spawner.TimeThreshold = 0.8f;
+                Invoke("SetStateNormal",5);
         } else if (GameState == 5) {
-
+                Spawner.TimeThreshold = 0.5f;
+                Invoke("SetStateNormal",5);
      }
 }
 
