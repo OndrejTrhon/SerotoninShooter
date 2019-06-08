@@ -13,11 +13,12 @@ public class Controller : MonoBehaviour
     //Time, starting time, for dev purposes only
 
     private int GameState;
-    //1 = normal , 2 = soon, 3 = too soon, 4 = early, 5 = too early
+    //1 = normal , 2 = soon, 3 = too soon, 4 = really soon, 5 = late, 6 = too late, 7 = really late
 
     public Text LevelText;
     public Text TimeText;
     public Text GameStateText;
+    public Text TimeThresholdCheck;
 
     public SpawnMovingTargets Spawner;
     // Start is called before the first frame update
@@ -77,23 +78,27 @@ public class Controller : MonoBehaviour
     void CheckTime() {
          
         if ((Time == 11) || (Time == 12) || (Time == 13)) {
-            Level = 10;
+            Level = 24;
+            SetStateNormal();
         } else if (Time > 0 && Time < 4) {
+            Level = 10;
+            SetStateReallySoon();
         } else if (Time > 3 && Time < 8) {
+            Level = 15;
+            SetStateTooSoon();
         } else if (Time > 7 && Time < 11) {
-            
+            Level = 20;
+            SetStateSoon();
         } else if (Time > 13 && Time < 18) {
-            
+            Level = 24;
+            SetStateLate();
         } else if (Time > 17 && Time < 21) {
-            
+            Level = 24;
+            SetStateTooLate();
         } else if (Time > 20 && Time < 25) {
-            
+            Level = 24;
+            SetStateReallyLate();
         }
-            
-
-
-
-        
 
     }
 
@@ -104,20 +109,41 @@ public class Controller : MonoBehaviour
 
     void SetStateSoon() {
         GameState = 2;
+        Spawner.TimeThreshold = 0.8f; 
+        Invoke("SetStateNormal",5);
     }
 
     void SetStateTooSoon() {
         GameState = 3;
+        Spawner.TimeThreshold = 0.5f;
+        Invoke("SetStateNormal",5);
     }
 
-    void SetStateEarly() {
+    void SetStateReallySoon() {
         GameState = 4;
+        Spawner.TimeThreshold = 0.3f;
+        Invoke("SetStateNormal",5);
     }
 
-    void SetStateTooEarly() {
+    void SetStateLate() {
         GameState = 5;
+        Spawner.TimeThreshold = 0.8f;
+        Invoke("SetStateNormal",5);
     }
 
+    void SetStateTooLate() {
+        GameState = 6;
+        Spawner.TimeThreshold = 0.5f;
+        Invoke("SetStateNormal",5);
+    }
+
+    void SetStateReallyLate() {
+        GameState = 7;
+        Spawner.TimeThreshold = 0.3f;
+        Invoke("SetStateNormal",5);
+    }
+
+//UPDATE DIFFICULTY QUESTION
 
     void UpdateDifficulty() {
         
@@ -173,19 +199,9 @@ public class Controller : MonoBehaviour
             } else if (Level == 0) {
                 Spawner.TimeThreshold = 0.1f;
             }
-        } else if (GameState == 2) {
-                Spawner.TimeThreshold = 0.8f; 
-                 Invoke("SetStateNormal",5);
-        } else if (GameState == 3) {
-                Spawner.TimeThreshold = 0.5f;
-                Invoke("SetStateNormal",5);
-        } else if (GameState == 4) {
-                Spawner.TimeThreshold = 0.8f;
-                Invoke("SetStateNormal",5);
-        } else if (GameState == 5) {
-                Spawner.TimeThreshold = 0.5f;
-                Invoke("SetStateNormal",5);
-     }
+        } 
+        TimeThresholdCheck.text = "Spawner: " + Spawner.TimeThreshold.ToString ();
+
 }
 
 }
