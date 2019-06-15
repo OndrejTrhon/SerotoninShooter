@@ -26,5 +26,8 @@ public class MovePlayer : MonoBehaviour {
 
      }
 
+     Vector3 pos = transform.position;
+     pos.x = Mathf.Clamp (pos.x, -3, 1);
+     transform.position = pos;
 	}
 }
