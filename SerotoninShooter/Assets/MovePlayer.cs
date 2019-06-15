@@ -14,7 +14,7 @@ public class MovePlayer : MonoBehaviour {
 
      {
 
-          gameObject.transform.Translate (Vector3.left * 0.1f);
+          gameObject.transform.Translate (Vector3.left * 0.05f);
 
      }
 
@@ -22,23 +22,7 @@ public class MovePlayer : MonoBehaviour {
 
      {
 
-          gameObject.transform.Translate (Vector3.right * 0.1f);
-
-     }
-
-     if (Input.GetKey (KeyCode.UpArrow))
-
-     {
-
-          gameObject.transform.Translate (Vector3.up * 0.1f);
-
-     }
-
-     if (Input.GetKey (KeyCode.DownArrow))
-
-     {
-
-          gameObject.transform.Translate (Vector3.down * 0.1f);
+          gameObject.transform.Translate (Vector3.right * 0.05f);
 
      }
 
