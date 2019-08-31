@@ -19,8 +19,13 @@ public class Controller : MonoBehaviour
     public Text TimeText;
     public Text GameStateText;
     public Text TimeThresholdCheck;
+    public GameObject LevelObject;
 
     public SpawnMovingTargets Spawner;
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +72,7 @@ public class Controller : MonoBehaviour
     void LevelObserver() {
         Level--;
         LevelText.text = "Level: " + Level.ToString ();
+        LevelShow();
     }
 
     //UpdateDifficulty according to the level
@@ -203,5 +209,70 @@ public class Controller : MonoBehaviour
         TimeThresholdCheck.text = "Spawner: " + Spawner.TimeThreshold.ToString ();
 
 }
+
+    void DisableChildren(GameObject TargetParent, int LevelIndex) {   
+
+        for (int a = 0; a < TargetParent.transform.childCount; a++)
+            {
+              TargetParent.transform.GetChild(a).gameObject.SetActive(false);
+            }
+
+        TargetParent.transform.GetChild(LevelIndex).gameObject.SetActive(true);
+
+    }
+
+    void LevelShow() {
+            if (Level == 24) {    
+                DisableChildren (LevelObject, 22);
+            } else if (Level == 23) {
+                DisableChildren (LevelObject, 22);
+            } else if (Level == 22) {
+                DisableChildren (LevelObject, 21);
+            } else if (Level == 21) {
+                DisableChildren (LevelObject, 20);
+            } else if (Level == 20) {
+                DisableChildren (LevelObject, 19);
+            } else if (Level == 19) {
+                DisableChildren (LevelObject, 18);
+            } else if (Level == 18) {
+                DisableChildren (LevelObject, 17);
+            } else if (Level == 17) {
+                DisableChildren (LevelObject, 16);
+            } else if (Level == 16) {
+                DisableChildren (LevelObject, 15);
+            } else if (Level == 15) {
+                DisableChildren (LevelObject, 14);
+            } else if (Level == 14) {
+                DisableChildren (LevelObject, 13);
+            } else if (Level == 13) {
+                DisableChildren (LevelObject, 12);
+            } else if (Level == 12) {
+                DisableChildren (LevelObject, 11);            
+            } else if (Level == 11) {
+                DisableChildren (LevelObject, 10);
+            } else if (Level == 10) {
+                DisableChildren (LevelObject, 9);
+            } else if (Level == 9) {
+                DisableChildren (LevelObject, 8);
+            } else if (Level == 8) {
+                DisableChildren (LevelObject, 7);
+            } else if (Level == 7) {
+                DisableChildren (LevelObject, 6);
+            } else if (Level == 6) {
+                DisableChildren (LevelObject, 5);
+            } else if (Level == 5) {
+                DisableChildren (LevelObject, 4);
+            } else if (Level == 4) {
+                DisableChildren (LevelObject, 3);
+            } else if (Level == 3) {
+                DisableChildren (LevelObject, 2);
+            } else if (Level == 2) {
+                DisableChildren (LevelObject, 1);
+            } else if (Level == 1) {
+                DisableChildren (LevelObject, 0);
+            } else if (Level == 0) {
+                DisableChildren (LevelObject, 0);
+            }
+    }
 
 }
