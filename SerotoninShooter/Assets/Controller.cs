@@ -20,6 +20,7 @@ public class Controller : MonoBehaviour
     public Text GameStateText;
     public Text TimeThresholdCheck;
     public GameObject LevelObject;
+    public GameObject MessageDisplay;
 
     public SpawnMovingTargets Spawner;
 
@@ -231,6 +232,7 @@ public class Controller : MonoBehaviour
             } else if (Level == 21) {
                 DisableChildren (LevelObject, 20);
             } else if (Level == 20) {
+                ShowMessage();
                 DisableChildren (LevelObject, 19);
             } else if (Level == 19) {
                 DisableChildren (LevelObject, 18);
@@ -275,4 +277,9 @@ public class Controller : MonoBehaviour
             }
     }
 
+    void ShowMessage() {
+        var Message = MessageDisplay.GetComponent<TMPro.TextMeshProUGUI>();
+        Message.text = "TEST";   
+
+    }
 }
