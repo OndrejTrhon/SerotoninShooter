@@ -34,6 +34,7 @@ public class Controller : MonoBehaviour
         Time = 0;
         GameState = 1;
         InvokeRepeating("Ticker", 1.0f, 1f);
+        InvokeRepeating("Ticker_messages", 2.0f, 2f);
         InvokeRepeating("Clock", 1.0f, 1f);
     }
 
@@ -67,6 +68,11 @@ public class Controller : MonoBehaviour
         LevelObserver();
               Debug.Log(Level);
               GameStateText.text = "GameState: " + GameState.ToString ();
+    }
+
+      void Ticker_messages()
+    {
+        SetMessage();
     }
 
     //function taking care of checking the level of antidepressant
@@ -109,6 +115,43 @@ public class Controller : MonoBehaviour
 
     }
 
+
+    void SetList(List<string> listvar) {
+        var Message = MessageDisplay.GetComponent<TMPro.TextMeshProUGUI>();
+        int index = Random.Range (0, listvar.Count);
+        Message.text = listvar[index];
+    }
+
+
+    void SetMessage() {
+    
+        if (GameState == 1) {
+            var list = new List<string>{"VIVID DREAMS (ALSO BAD ONES)","HARDER ORGASM","LOWER ANXIETY (BUT ALSO PLEASURE)","TINY TREMORS"};
+            SetList(list);
+
+        } else if (GameState == 2) {
+            var list = new List<string>{"TINY TREMORS (AND HEAT)","RESTLESS LEGS","LITTLE HEADACHE"};
+            SetList(list);
+        } else if (GameState == 3) {
+            var list = new List<string>{"TREMORS","HEADACHE","CONFUSION"};
+            SetList(list);
+        } else if (GameState == 4) {
+            var list = new List<string>{"CONFUSION","BIG HEADACHE","HOW CAN I GET THE WOrk DONE?"};
+            SetList(list);
+        } else if (GameState == 5) {
+            var list = new List<string>{"I FEEL LIKE A FEATHER","ANXIOUS?","TIRED"};
+            SetList(list);
+        } else if (GameState == 6) {
+            var list = new List<string>{"LITTLE HEADACHE","ANXIOUS!","UNCLEAR CRAVING"};
+            SetList(list);
+        } else if (GameState == 7) {
+            var list = new List<string>{"DAZED","HEADACHE","SHAKING WELL"};
+            SetList(list);
+        }
+
+
+    }
+
     //SetState Functions, invoked by CheckTime() which alter gameplay according to when player took medication
     void SetStateNormal() {
         GameState = 1;
@@ -146,7 +189,7 @@ public class Controller : MonoBehaviour
 
     void SetStateReallyLate() {
         GameState = 7;
-        Spawner.TimeThreshold = 0.3f;
+        Spawner.TimeThreshold = 0.3f;   
         Invoke("SetStateNormal",5);
     }
 
@@ -232,7 +275,6 @@ public class Controller : MonoBehaviour
             } else if (Level == 21) {
                 DisableChildren (LevelObject, 20);
             } else if (Level == 20) {
-                ShowMessage();
                 DisableChildren (LevelObject, 19);
             } else if (Level == 19) {
                 DisableChildren (LevelObject, 18);
