@@ -15,6 +15,7 @@ public class Controller : MonoBehaviour
     private int GameState;
     //1 = normal , 2 = soon, 3 = too soon, 4 = really soon, 5 = late, 6 = too late, 7 = really late
 
+    private int Day;
     public Text LevelText;
     public Text TimeText;
     public Text GameStateText;
@@ -22,8 +23,8 @@ public class Controller : MonoBehaviour
     public GameObject LevelObject;
     public GameObject MessageDisplay;
 
+    public GameObject EndScreen;
     public SpawnMovingTargets Spawner;
-
 
 
 
@@ -31,6 +32,8 @@ public class Controller : MonoBehaviour
     void Start()
     {
         Level = 12;
+        Day = 1;
+                            Debug.Log(Day); 
         Time = 0;
         GameState = 1;
         InvokeRepeating("Ticker", 1.0f, 1f);
@@ -45,20 +48,27 @@ public class Controller : MonoBehaviour
      if (Input.GetKeyDown(KeyCode.E)) {
               TakeMedication();
      }
+
+     if (Day == 8) {
+         EndGame();
+     }
           
     }
 
     //Clock only controls time
 
     void Clock() {
-        Debug.Log("Time"); 
         if (Time <= 23) {
             Time = Time + 1;
         } else {
             Time = 0;
+            Day = Day + 1;
+                                Debug.Log(Day); 
         }
-        Debug.Log(Time);
+
+        //Debug.Log(Time);
         TimeText.text = "Time: " + Time.ToString ();
+    
     }
 
     //Tick is the main fucntion which is updated every second, setting the difficulty of the game
@@ -66,7 +76,7 @@ public class Controller : MonoBehaviour
     {
         UpdateDifficulty();
         LevelObserver();
-              Debug.Log(Level);
+              //Debug.Log(Level);
               GameStateText.text = "GameState: " + GameState.ToString ();
     }
 
@@ -323,5 +333,9 @@ public class Controller : MonoBehaviour
         var Message = MessageDisplay.GetComponent<TMPro.TextMeshProUGUI>();
         Message.text = "TEST";   
 
+    }
+
+    void EndGame() {  
+        EndScreen.gameObject.SetActive(true);
     }
 }

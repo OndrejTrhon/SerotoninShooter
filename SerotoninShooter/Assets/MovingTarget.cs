@@ -18,7 +18,6 @@ public class MovingTarget : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
-					Debug.Log("Collision detected");
 
 	if (coll.gameObject.tag == "Player" && !hasEntered){
 		hasEntered = true;
@@ -26,7 +25,6 @@ public class MovingTarget : MonoBehaviour {
 			VelocityTemp = GetComponent<Rigidbody2D>().velocity;
 			VelocityTemp = (-1)*VelocityTemp;
 			GetComponent<Rigidbody2D>().velocity = VelocityTemp;
-			Debug.Log("Collision triggered");
 			
 	}
 }
