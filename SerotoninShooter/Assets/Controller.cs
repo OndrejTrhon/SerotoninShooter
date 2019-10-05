@@ -17,16 +17,15 @@ public class Controller : MonoBehaviour
 
     private int Day;
     public Text LevelText;
-    public Text TimeText;
+    public GameObject TimeText;
     public Text GameStateText;
     public Text TimeThresholdCheck;
     public GameObject LevelObject;
     public GameObject MessageDisplay;
-
     public GameObject EndScreen;
     public SpawnMovingTargets Spawner;
 
-
+public ScreenLimitBottom screenLimitBottom;
 
     // Start is called before the first frame update
     void Start()
@@ -67,7 +66,9 @@ public class Controller : MonoBehaviour
         }
 
         //Debug.Log(Time);
-        TimeText.text = "Time: " + Time.ToString ();
+        var TimeDisplay = TimeText.GetComponent<TMPro.TextMeshProUGUI>();
+
+       TimeDisplay.text =  Time.ToString ();
     
     }
 
@@ -81,7 +82,7 @@ public class Controller : MonoBehaviour
     }
 
       void Ticker_messages()
-    {
+    {   
         SetMessage();
     }
 
@@ -95,31 +96,35 @@ public class Controller : MonoBehaviour
     //UpdateDifficulty according to the level
 
     void TakeMedication() {
+        Level = Level + 10;
+            if (Level > 24) {
+                Level = 24;
+            }
         CheckTime();
     }
 
     void CheckTime() {
          
         if ((Time == 11) || (Time == 12) || (Time == 13)) {
-            Level = 24;
+            //Level = 24;
             SetStateNormal();
         } else if (Time > 0 && Time < 4) {
-            Level = 10;
+            //Level = 10;
             SetStateReallySoon();
         } else if (Time > 3 && Time < 8) {
-            Level = 15;
+             //Level = 15;
             SetStateTooSoon();
         } else if (Time > 7 && Time < 11) {
-            Level = 20;
+            // Level = 20;
             SetStateSoon();
         } else if (Time > 13 && Time < 18) {
-            Level = 24;
+            // Level = 24;
             SetStateLate();
         } else if (Time > 17 && Time < 21) {
-            Level = 24;
+            // Level = 24;
             SetStateTooLate();
         } else if (Time > 20 && Time < 25) {
-            Level = 24;
+            // Level = 24;
             SetStateReallyLate();
         }
 
@@ -208,7 +213,7 @@ public class Controller : MonoBehaviour
     void UpdateDifficulty() {
         
         if (GameState == 1) {
-            if (Level == 24) {
+            if (Level >= 24) {
                 Spawner.TimeThreshold = 2f;
             } else if (Level == 23) {
                 Spawner.TimeThreshold = 1.9f;
@@ -276,7 +281,7 @@ public class Controller : MonoBehaviour
     }
 
     void LevelShow() {
-            if (Level == 24) {    
+            if (Level >= 24) {    
                 DisableChildren (LevelObject, 22);
             } else if (Level == 23) {
                 DisableChildren (LevelObject, 22);
@@ -337,5 +342,6 @@ public class Controller : MonoBehaviour
 
     void EndGame() {  
         EndScreen.gameObject.SetActive(true);
+        print(screenLimitBottom.EnemiesLeft);
     }
 }

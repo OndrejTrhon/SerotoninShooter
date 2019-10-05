@@ -7,7 +7,7 @@ public class ScreenLimitBottom : MonoBehaviour
 {
 
     public Text EnemiesLeftText;
-    public static int EnemiesLeft;
+    public int EnemiesLeft;
     // Start is called before the first frame update
     void Start()
     {
