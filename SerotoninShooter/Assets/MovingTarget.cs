@@ -7,14 +7,15 @@ public class MovingTarget : MonoBehaviour {
 
 	public GameObject ObjectToSwitch;
 	private bool hasEntered;
+
 	// Use this for initialization
 	void Start () {
+
 		GetComponent<Rigidbody2D>().velocity = Vector2.down * 2;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {

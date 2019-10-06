@@ -26,6 +26,8 @@ public class Controller : MonoBehaviour
     public GameObject EndScreen;
     public SpawnMovingTargets Spawner;
     public ScreenLimitBottom screenLimitBottom;
+    public Animator PillsAnimation;
+    public GameObject PillsAnimationObject;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +47,9 @@ public class Controller : MonoBehaviour
     {
         //This is where you take antidepressants, yay
      if (Input.GetKeyDown(KeyCode.E)) {
+              PillsAnimation.Play("animace_start");
               TakeMedication();
+              
      }
 
      if (Day == 8) {
