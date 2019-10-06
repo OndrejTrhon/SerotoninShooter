@@ -14,7 +14,7 @@ public class SpawnMovingTargets : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		timer += Time.deltaTime;
-  	  float range = Random.Range (-2, 2);
+  	  float range = Random.Range (-2f, 2.7f);
    	 Vector3 newPosition = new Vector3 (GameObject.Find("targetSource").transform.position.x + range, transform.position.y, 0);
     	if (timer >= TimeThreshold)
     {
