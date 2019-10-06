@@ -13,6 +13,8 @@ public class Controller : MonoBehaviour
     private int Time;
     //Time, starting time, for dev purposes only
 
+    private int Tick_step;
+
     private int GameState;
     //1 = normal , 2 = soon, 3 = too soon, 4 = really soon, 5 = late, 6 = too late, 7 = really late
 
@@ -24,6 +26,13 @@ public class Controller : MonoBehaviour
     public GameObject LevelObject;
     public GameObject MessageDisplay;
     public GameObject EndScreen;
+
+    private int DoseCount;
+    private bool InputEnabled;
+
+    public GameObject OverdoseWarning;
+
+
     public SpawnMovingTargets Spawner;
     public ScreenLimitBottom screenLimitBottom;
     public Animator PillsAnimation;
@@ -31,8 +40,11 @@ public class Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DoseCount = 0;
+        InputEnabled = true;
         Level = 12;
         Day = 1;
+        Tick_step = 0;
                             Debug.Log(Day); 
         Time = 0;
         GameState = 1;
@@ -46,12 +58,18 @@ public class Controller : MonoBehaviour
     void Update()
     {
         //This is where you take antidepressants, yay
-     if (Input.GetKeyDown(KeyCode.E)) {
-              PillsAnimation.Play("animace_start");
-              TakeMedication();
-              
-     }
-
+     
+     if  (InputEnabled == true) {
+        if (Input.GetKeyDown(KeyCode.E)) {
+                    DoseCount++;
+                PillsAnimation.Play("animace_start");
+                TakeMedication();
+                
+                }
+                
+        }
+    
+     
      if (Day == 8) {
          EndGame();
      }
@@ -80,6 +98,7 @@ public class Controller : MonoBehaviour
     void Ticker()
     {
         UpdateDifficulty();
+        Tick_step++;
         LevelObserver();
               //Debug.Log(Level);
               GameStateText.text = "GameState: " + GameState.ToString ();
