@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering.PostProcessing;
 
 public class Controller : MonoBehaviour
 
@@ -24,9 +25,7 @@ public class Controller : MonoBehaviour
     public GameObject MessageDisplay;
     public GameObject EndScreen;
     public SpawnMovingTargets Spawner;
-
-public ScreenLimitBottom screenLimitBottom;
-
+    public ScreenLimitBottom screenLimitBottom;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +37,7 @@ public ScreenLimitBottom screenLimitBottom;
         InvokeRepeating("Ticker", 1.0f, 1f);
         InvokeRepeating("Ticker_messages", 2.0f, 2f);
         InvokeRepeating("Clock", 1.0f, 1f);
+
     }
 
     // Update is called once per frame
@@ -79,6 +79,7 @@ public ScreenLimitBottom screenLimitBottom;
         LevelObserver();
               //Debug.Log(Level);
               GameStateText.text = "GameState: " + GameState.ToString ();
+
     }
 
       void Ticker_messages()
@@ -281,6 +282,8 @@ public ScreenLimitBottom screenLimitBottom;
     }
 
     void LevelShow() {
+
+
             if (Level >= 24) {    
                 DisableChildren (LevelObject, 22);
             } else if (Level == 23) {
