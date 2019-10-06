@@ -5,7 +5,12 @@ using UnityEngine;
 
 public class MovePlayer : MonoBehaviour {
 	// Use this for initialization
-	void Start () {
+	
+     public float PlayerSpeed;
+     
+     
+     void Start () {
+          PlayerSpeed = 0.03f;
 	}
 	
 	// Update is called once per frame
@@ -14,7 +19,7 @@ public class MovePlayer : MonoBehaviour {
 
      {
 
-          gameObject.transform.Translate (Vector3.left * 0.05f);
+          gameObject.transform.Translate (Vector3.left * PlayerSpeed);
 
      }
 
@@ -22,7 +27,7 @@ public class MovePlayer : MonoBehaviour {
 
      {
 
-          gameObject.transform.Translate (Vector3.right * 0.05f);
+          gameObject.transform.Translate (Vector3.right * PlayerSpeed);
 
      }
 
