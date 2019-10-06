@@ -194,7 +194,7 @@ public class Controller : MonoBehaviour
     //SetState Functions, invoked by CheckTime() which alter gameplay according to when player took medication
     void SetStateNormal() {
         GameState = 1;
-    }
+            }
 
     void SetStateSoon() {
         GameState = 2;

@@ -9,9 +9,12 @@ public class SpawnEffects : MonoBehaviour
     Grain m_Grain;
     Bloom m_Bloom;
     public bool EnemyCollision;
+    public static float BloomIntensity;
 
     void Start()
     {
+
+        
         m_Grain = ScriptableObject.CreateInstance<Grain>();
         m_Grain.enabled.Override(true);
         m_Grain.intensity.Override(1f);
@@ -29,11 +32,8 @@ public class SpawnEffects : MonoBehaviour
     {
         SerotoninMissed = screenLimitBottom.EnemiesLeft;
         m_Grain.intensity.value = SerotoninMissed/5;
+        m_Bloom.intensity.value = BloomIntensity;
 
-        if (EnemyCollision == true) {
-            m_Bloom.intensity.value = 20f;
-            EnemyCollision = false;
-        }
     }
 
     void OnDestroy()

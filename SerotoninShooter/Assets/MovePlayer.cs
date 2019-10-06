@@ -6,7 +6,7 @@ using UnityEngine;
 public class MovePlayer : MonoBehaviour {
 	// Use this for initialization
 	
-     public float PlayerSpeed;
+     public static float PlayerSpeed;
      
      
      void Start () {
