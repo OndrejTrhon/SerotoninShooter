@@ -10,7 +10,7 @@ public class MovePlayer : MonoBehaviour {
      
      
      void Start () {
-          PlayerSpeed = 0.03f;
+          PlayerSpeed = 0.1f;
 	}
 	
 	// Update is called once per frame
@@ -32,7 +32,7 @@ public class MovePlayer : MonoBehaviour {
      }
 
      Vector3 pos = transform.position;
-     pos.x = Mathf.Clamp (pos.x, -3, 1);
+     pos.x = Mathf.Clamp (pos.x, -7, 7);
      transform.position = pos;
 	}
 }
