@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ScreenLimitBottom : MonoBehaviour
 {
@@ -17,7 +18,11 @@ public class ScreenLimitBottom : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (EnemiesLeft == 100) {
+            SceneManager.LoadScene("GameOver");
+
+
+        }   
     }
 
     void OnTriggerEnter2D (Collider2D other) //the code below is only called when an object that includes a collider enters the trigger 2D collider attached to the screen limit object.

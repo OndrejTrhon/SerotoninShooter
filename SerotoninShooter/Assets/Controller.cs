@@ -21,6 +21,7 @@ public class Controller : MonoBehaviour
     private int Day;
     public Text LevelText;
     public GameObject TimeText;
+    public GameObject TimeZero;
     public Text GameStateText;
     public Text TimeThresholdCheck;
     public GameObject LevelObject;
@@ -86,7 +87,14 @@ public class Controller : MonoBehaviour
             Day = Day + 1;
                                 Debug.Log(Day); 
         }
+        if (Time == 0) {
+            TimeZero.SetActive(true);
+        }
 
+        if (Time == 10) {
+            TimeZero.SetActive(false);
+
+        }
         //Debug.Log(Time);
         var TimeDisplay = TimeText.GetComponent<TMPro.TextMeshProUGUI>();
 
