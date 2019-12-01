@@ -1892,6 +1892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 949a706eb65ccef498a60892ebc6b02b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HighScoreTextDisplay: {fileID: 0}
   LevelText: {fileID: 1980377801}
   TimeText: {fileID: 237704592}
   DayText: {fileID: 69569126}
@@ -2659,6 +2660,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemiesLeftText: {fileID: 1341867869}
   EnemiesLeft: 0
+  HighScore: 0
 --- !u!1 &884172097
 GameObject:
   m_ObjectHideFlags: 0

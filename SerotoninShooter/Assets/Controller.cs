@@ -18,6 +18,9 @@ public class Controller : MonoBehaviour
     private int GameState;
     //1 = normal , 2 = soon, 3 = too soon, 4 = really soon, 5 = late, 6 = too late, 7 = really late
 
+
+    public GameObject HighScoreTextDisplay;
+    private int HighScore;
     private int Day;
     public Text LevelText;
     public GameObject TimeText;
@@ -379,6 +382,13 @@ public class Controller : MonoBehaviour
 
     void EndGame() {  
         EndScreen.gameObject.SetActive(true);
-        print(screenLimitBottom.EnemiesLeft);
+        
+
+    }
+
+    void ShowHighScore() {
+        HighScore = screenLimitBottom.HighScore;
+        var HighScoreText = HighScoreTextDisplay.GetComponent<TMPro.TextMeshProUGUI>();
+        HighScoreText.text = HighScore.ToString ();   
     }
 }
