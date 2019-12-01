@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using System.Collections;
 
 public class SpawnEffects : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class SpawnEffects : MonoBehaviour
 
     void Start()
     {
-
+        StartCoroutine("UpdateSerotoninsMissed");
         m_Grain = ScriptableObject.CreateInstance<Grain>();
         m_Grain.enabled.Override(true);
         m_Grain.intensity.Override(1f);
@@ -29,7 +30,7 @@ public class SpawnEffects : MonoBehaviour
 
     void Update()
     {
-        SerotoninMissed = screenLimitBottom.EnemiesLeft;
+       
         m_Grain.intensity.value = SerotoninMissed/6;
         m_Bloom.intensity.value = BloomIntensity;
 
@@ -44,5 +45,14 @@ public class SpawnEffects : MonoBehaviour
     void OnDestroy()
     {
         RuntimeUtilities.DestroyVolume(m_Volume, true, true);
+    }
+
+    IEnumerator UpdateSerotoninsMissed() 
+    {
+        for(;;) 
+        {
+            SerotoninMissed = screenLimitBottom.EnemiesLeft;
+            yield return new WaitForSeconds(.1f);
+        }
     }
 }
