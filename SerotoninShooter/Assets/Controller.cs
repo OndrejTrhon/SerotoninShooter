@@ -51,7 +51,7 @@ public class Controller : MonoBehaviour
         Time = 0;
         GameState = 1;
         InvokeRepeating("Ticker", 1.0f, 1f);
-        InvokeRepeating("Ticker_messages", 2.0f, 2f);
+        InvokeRepeating("Ticker_messages", 2.0f, 4f);
         InvokeRepeating("Clock", 1.0f, 1f);
 
     }
