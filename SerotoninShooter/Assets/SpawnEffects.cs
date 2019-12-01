@@ -33,6 +33,12 @@ public class SpawnEffects : MonoBehaviour
         m_Grain.intensity.value = SerotoninMissed/6;
         m_Bloom.intensity.value = BloomIntensity;
 
+        if (Input.GetKeyDown(KeyCode.E)) {
+            m_Grain.intensity.value = 0;
+            screenLimitBottom.EnemiesLeft = 0;
+        }
+
+
     }
 
     void OnDestroy()
