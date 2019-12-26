@@ -28,6 +28,9 @@ public class Controller : MonoBehaviour
     public GameObject DayText;
     public GameObject TimeZero;
     public GameObject TimeZeroes;
+
+    public GameObject RandomEventText;
+
     public Text GameStateText;
     public Text TimeThresholdCheck;
     public GameObject LevelObject;
@@ -65,7 +68,8 @@ public class Controller : MonoBehaviour
     void Update()
     {
         //This is where you take antidepressants, yay
-     
+
+
      if  (InputEnabled == true) {
         if (Input.GetKeyDown(KeyCode.E)) {
                     DoseCount++;
@@ -99,13 +103,16 @@ public class Controller : MonoBehaviour
                 var DayDisplay = DayText.GetComponent<TMPro.TextMeshProUGUI>();
                 DayDisplay.text =  Day.ToString ();
         }
+
+        if (Time == 11) {
+            RandomEventGate();
+        } 
         if (Time == 0) {
             TimeZero.SetActive(true);
         }
 
         if (Time == 10) {
             TimeZero.SetActive(false);
-
         }
         //Debug.Log(Time);
         var TimeDisplay = TimeText.GetComponent<TMPro.TextMeshProUGUI>();
@@ -282,31 +289,31 @@ public class Controller : MonoBehaviour
             } else if (Level == 13) {
                 Spawner.TimeThreshold = 0.9f;
             } else if (Level == 12) {
-                Spawner.TimeThreshold = 0.85f;
-            } else if (Level == 11) {
                 Spawner.TimeThreshold = 0.8f;
-            } else if (Level == 10) {
+            } else if (Level == 11) {
                 Spawner.TimeThreshold = 0.75f;
-            } else if (Level == 9) {
+            } else if (Level == 10) {
                 Spawner.TimeThreshold = 0.7f;
-            } else if (Level == 8) {
+            } else if (Level == 9) {
                 Spawner.TimeThreshold = 0.65f;
-            } else if (Level == 7) {
+            } else if (Level == 8) {
                 Spawner.TimeThreshold = 0.6f;
+            } else if (Level == 7) {
+                Spawner.TimeThreshold = 0.55f;
             } else if (Level == 6) {
                 Spawner.TimeThreshold = 0.5f;
             } else if (Level == 5) {
-                Spawner.TimeThreshold = 0.4f;
+                Spawner.TimeThreshold = 0.45f;
             } else if (Level == 4) {
-                Spawner.TimeThreshold = 0.3f;
+                Spawner.TimeThreshold = 0.4f;
             } else if (Level == 3) {
-                Spawner.TimeThreshold = 0.2f;
+                Spawner.TimeThreshold = 0.35f;
             } else if (Level == 2) {
-                Spawner.TimeThreshold = 0.15f;
+                Spawner.TimeThreshold = 0.3f;
             } else if (Level == 1) {
-                Spawner.TimeThreshold = 0.1f;
+                Spawner.TimeThreshold = 0.25f;
             } else if (Level == 0) {
-                Spawner.TimeThreshold = 0.1f;
+                Spawner.TimeThreshold = 0.2f;
             }
         } 
         TimeThresholdCheck.text = "Spawner: " + Spawner.TimeThreshold.ToString ();
@@ -420,7 +427,31 @@ public class Controller : MonoBehaviour
     }  
 
     void RunRandomEvent() {
+        InputEnabled = false;
+        var RndText = RandomEventText.GetComponent<TextMeshProUGUI>();
+        RandomEventText.gameObject.SetActive(true);
         SetTimeColor("red");
+
+        var rnd_int = Random.Range(1, 5);
+        
+            
+            if (rnd_int == 1) {
+                RndText.text = "THE MORNING WAS TOO HECTIC, YOU SIMPLY MISSED THE ALARM...";
+                Invoke("EndRandomEvent",4);   
+            } else if (rnd_int == 2) {
+                RndText.text = "YOU WENT TO LUNCH WITH FRIEND AND YOU TURNED THE ALAMR OFF MID-CONVERSATION...";
+                Invoke("EndRandomEvent",6);
+            } else if (rnd_int == 3) {
+                RndText.text = "YOU FORGOT THE PILLS BEFORE HEADING OUT...";
+                Invoke("EndRandomEvent",7);
+            } else if (rnd_int == 4) {
+                RndText.text = "YOU WENT TO ENTICING LECTURE AND TURNED THE ALARM...";
+                Invoke("EndRandomEvent",3);
+            } else if (rnd_int == 5) {
+                RndText.text = "YOU RAN OUT OF PILLS, AND DOCTOR OPENS NEXT DAY...";
+                Invoke("EndRandomEvent",12);
+            }
+
         
     }
 
@@ -442,6 +473,19 @@ public class Controller : MonoBehaviour
         }
 
 
+    }
+
+    void EndRandomEvent(){
+        SetTimeColor("white");
+        RandomEventText.gameObject.SetActive(false);
+        InputEnabled = true;
+    }
+
+    void RandomEventGate() {
+        var rnd_int = Random.Range(0, 100);
+        if (rnd_int >= 85) {
+            RunRandomEvent();
+        }
     }
 
 }
