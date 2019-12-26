@@ -78,6 +78,10 @@ public class Controller : MonoBehaviour
      if (Day == 8) {
          EndGame();
      }
+
+     if (Input.GetKeyDown(KeyCode.X)) {
+         EndGame();
+     }
           
     }
 
@@ -382,7 +386,19 @@ public class Controller : MonoBehaviour
 
     void EndGame() {  
         EndScreen.gameObject.SetActive(true);
-        
+    }
+
+    public void RestartGame() {
+        DoseCount = 0;
+        InputEnabled = true;
+        Level = 12;
+        Day = 1;
+        Tick_step = 0;
+        Time = 0;
+        GameState = 1;
+        EndScreen.gameObject.SetActive(false);
+        DestroyAllEnemies();
+        screenLimitBottom.HighScore = 50000;
 
     }
 
@@ -391,4 +407,15 @@ public class Controller : MonoBehaviour
         var HighScoreText = HighScoreTextDisplay.GetComponent<TMPro.TextMeshProUGUI>();
         HighScoreText.text = HighScore.ToString ();   
     }
+
+     void DestroyAllEnemies()
+ {
+      var gameObjects = GameObject.FindGameObjectsWithTag ("enemy");
+     
+     for(var i = 0 ; i < gameObjects.Length ; i ++)
+     {
+         Destroy(gameObjects[i]);
+     }
+ }
+
 }
