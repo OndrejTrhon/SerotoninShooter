@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Rendering.PostProcessing;
@@ -26,6 +27,7 @@ public class Controller : MonoBehaviour
     public GameObject TimeText;
     public GameObject DayText;
     public GameObject TimeZero;
+    public GameObject TimeZeroes;
     public Text GameStateText;
     public Text TimeThresholdCheck;
     public GameObject LevelObject;
@@ -80,7 +82,7 @@ public class Controller : MonoBehaviour
      }
 
      if (Input.GetKeyDown(KeyCode.X)) {
-         EndGame();
+         RunRandomEvent();
      }
           
     }
@@ -408,14 +410,38 @@ public class Controller : MonoBehaviour
         HighScoreText.text = HighScore.ToString ();   
     }
 
-     void DestroyAllEnemies()
- {
+     void DestroyAllEnemies() {
       var gameObjects = GameObject.FindGameObjectsWithTag ("enemy");
      
      for(var i = 0 ; i < gameObjects.Length ; i ++)
      {
          Destroy(gameObjects[i]);
      }
- }
+    }  
+
+    void RunRandomEvent() {
+        SetTimeColor("red");
+        
+    }
+
+    void SetTimeColor(string color) {
+        if (color == "red") {
+            var TimeZeroTMP = TimeZero.GetComponent<TextMeshProUGUI>();
+            var TimeTextTMP = TimeText.GetComponent<TextMeshProUGUI>();
+            var TimeZeroesTMP = TimeZeroes.GetComponent<TextMeshProUGUI>();
+            TimeZeroTMP.color = new Color32(252, 3, 3, 255);
+            TimeTextTMP.color = new Color32(252, 3, 3, 255);
+            TimeZeroesTMP.color = new Color32(252, 3, 3, 255);
+        } else {
+            var TimeZeroTMP = TimeZero.GetComponent<TextMeshProUGUI>();
+            var TimeTextTMP = TimeText.GetComponent<TextMeshProUGUI>();
+            var TimeZeroesTMP = TimeZeroes.GetComponent<TextMeshProUGUI>();
+            TimeZeroTMP.color = new Color32(252, 255, 255, 255);
+            TimeTextTMP.color = new Color32(252, 255, 255, 255);
+            TimeZeroesTMP.color = new Color32(252, 255, 255, 255);
+        }
+
+
+    }
 
 }
