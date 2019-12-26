@@ -134,7 +134,7 @@ public class Controller : MonoBehaviour
     //UpdateDifficulty according to the level
 
     void TakeMedication() {
-        Level = Level + 10;
+        Level = Level + 24;
             if (Level > 24) {
                 Level = 24;
             }
