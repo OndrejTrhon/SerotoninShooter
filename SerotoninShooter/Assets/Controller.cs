@@ -39,6 +39,7 @@ public class Controller : MonoBehaviour
 
     private int DoseCount;
     private bool InputEnabled;
+    private bool EndGameState;
 
     public GameObject OverdoseWarning;
 
@@ -81,12 +82,12 @@ public class Controller : MonoBehaviour
         }
     
      
-     if (Day == 8) {
+     if (Day == 6) {
          EndGame();
      }
 
      if (Input.GetKeyDown(KeyCode.X)) {
-         RunRandomEvent();
+         EndGame();
      }
           
     }
@@ -394,7 +395,10 @@ public class Controller : MonoBehaviour
     }
 
     void EndGame() {  
+        EndGameState = true;
+        ShowHighScore();
         EndScreen.gameObject.SetActive(true);
+        
     }
 
     public void RestartGame() {
@@ -407,14 +411,19 @@ public class Controller : MonoBehaviour
         GameState = 1;
         EndScreen.gameObject.SetActive(false);
         DestroyAllEnemies();
-        screenLimitBottom.HighScore = 50000;
+        screenLimitBottom.HighScore = 100000;
+        var DayDisplay = DayText.GetComponent<TMPro.TextMeshProUGUI>();
+                DayDisplay.text =  Day.ToString ();
 
     }
 
     void ShowHighScore() {
+        if (EndGameState == true) {
         HighScore = screenLimitBottom.HighScore;
         var HighScoreText = HighScoreTextDisplay.GetComponent<TMPro.TextMeshProUGUI>();
         HighScoreText.text = HighScore.ToString ();   
+        EndGameState = false;
+        }
     }
 
      void DestroyAllEnemies() {
@@ -467,9 +476,9 @@ public class Controller : MonoBehaviour
             var TimeZeroTMP = TimeZero.GetComponent<TextMeshProUGUI>();
             var TimeTextTMP = TimeText.GetComponent<TextMeshProUGUI>();
             var TimeZeroesTMP = TimeZeroes.GetComponent<TextMeshProUGUI>();
-            TimeZeroTMP.color = new Color32(252, 255, 255, 255);
-            TimeTextTMP.color = new Color32(252, 255, 255, 255);
-            TimeZeroesTMP.color = new Color32(252, 255, 255, 255);
+            TimeZeroTMP.color = new Color32(0, 0, 0, 0);
+            TimeTextTMP.color = new Color32(0, 0, 0, 0);
+            TimeZeroesTMP.color = new Color32(0, 0, 0, 0);
         }
 
 
@@ -483,7 +492,7 @@ public class Controller : MonoBehaviour
 
     void RandomEventGate() {
         var rnd_int = Random.Range(0, 100);
-        if (rnd_int >= 85) {
+        if (rnd_int >= 70) {
             RunRandomEvent();
         }
     }

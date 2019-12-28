@@ -14,7 +14,7 @@ public class ScreenLimitBottom : MonoBehaviour
     void Start()
     {
         EnemiesLeft = 0;
-        HighScore = 50000;
+        HighScore = 100000;
     }  
 
     // Update is called once per frame
